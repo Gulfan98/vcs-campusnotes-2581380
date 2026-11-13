@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CampusNotes</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f0f4f8;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #2457a7;
+        }
+
+        textarea {
+            width: 80%;
+            height: 150px;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #2457a7;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to CampusNotes</h1>
+    <p>Organize your academic notes easily.</p>
+
+    <h3>Write Your Notes</h3>
+
+    <textarea id="notes"
+        placeholder="Enter your notes here..."></textarea>
+
+    <br><br>
+
+    <button onclick="saveNotes()">Save Notes</button>
+
+    <p id="message"></p>
+
+    <script>
+        function saveNotes() {
+            let note = document.getElementById("notes").value;
+
+            localStorage.setItem("campusNotes", note);
+
+            document.getElementById("message").innerText =
+                "Notes saved successfully!";
+        }
+    </script>
+
+</body>
+</html>
