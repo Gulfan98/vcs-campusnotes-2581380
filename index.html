@@ -1,50 +1,115 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CampusNotes</title>
+
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             background: #f0f4f8;
             text-align: center;
-            padding: 40px;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         h1 {
             color: #2457a7;
         }
 
+        p {
+            color: #555;
+        }
+
         textarea {
-            width: 80%;
-            height: 150px;
-            padding: 10px;
+            width: 90%;
+            height: 180px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 12px 20px;
+            margin: 8px 4px;
             background: #2457a7;
             color: white;
             border: none;
+            border-radius: 6px;
             cursor: pointer;
+        }
+
+        button:hover {
+            background: #163d7a;
+        }
+
+        .clear-btn {
+            background: #dc3545;
+        }
+
+        .clear-btn:hover {
+            background: #a71d2a;
+        }
+
+        #message {
+            font-weight: bold;
+            color: green;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                padding: 20px 10px;
+            }
+
+            textarea {
+                width: 90%;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <h1>Welcome to CampusNotes</h1>
-    <p>Organize your academic notes easily.</p>
+    <div class="container">
 
-    <h3>Write Your Notes</h3>
+        <h1>Welcome to CampusNotes</h1>
 
-    <textarea id="notes"
-        placeholder="Enter your notes here..."></textarea>
+        <p>Organize your academic notes easily.</p>
 
-    <br><br>
+        <h3>Write Your Notes</h3>
 
-    <button onclick="saveNotes()">Save Notes</button>
+        <textarea id="notes"
+            placeholder="Enter your academic notes here..."></textarea>
 
-    <p id="message"></p>
+        <br>
+
+        <button onclick="saveNotes()">Save Notes</button>
+
+        <button onclick="loadNotes()">Load Notes</button>
+
+        <button class="clear-btn" onclick="clearNotes()">
+            Clear Notes
+        </button>
+
+        <p id="message"></p>
+
+    </div>
 
     <script>
         function saveNotes() {
@@ -55,6 +120,29 @@
             document.getElementById("message").innerText =
                 "Notes saved successfully!";
         }
+
+        function loadNotes() {
+            let savedNote = localStorage.getItem("campusNotes");
+
+            if (savedNote !== null) {
+                document.getElementById("notes").value = savedNote;
+                document.getElementById("message").innerText =
+                    "Notes loaded successfully!";
+            } else {
+                document.getElementById("message").innerText =
+                    "No saved notes found.";
+            }
+        }
+
+        function clearNotes() {
+            document.getElementById("notes").value = "";
+            localStorage.removeItem("campusNotes");
+
+            document.getElementById("message").innerText =
+                "Notes cleared successfully!";
+        }
+
+        window.onload = loadNotes;
     </script>
 
 </body>
