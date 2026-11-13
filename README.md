@@ -17,3 +17,6 @@ students organize their academic notes.
 ## Developer
 Gulfan Khan
 URN: 2581380
+
+## Latest Update
+This update was made from the cloned repository.
